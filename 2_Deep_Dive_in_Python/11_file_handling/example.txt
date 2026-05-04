@@ -1,0 +1,2 @@
+Hello!  this is example of write() into a file 
+This is append mode text append into the end of the file
