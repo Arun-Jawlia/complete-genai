@@ -7,6 +7,68 @@ import streamlit as st
 
 # Import pandas for data handling
 import pandas as pd
+st.write("Hello World")
+
+# Main title of the application
+st.title("Streamlit Application")
+
+# Display normal text
+st.write("This is my First Streamlit App")
+
+# Header (medium-sized heading)
+st.header("Welcome to Streamlit")
+
+# Subheader (smaller than header)
+st.subheader("This is subheader")
+
+# Plain text output
+# Useful for logs and simple messages
+st.text("This is plain text")
+
+
+
+# =========================================================
+# MARKDOWN
+# =========================================================
+
+# Markdown supports formatting like:
+# bold, italic, bullet points, code blocks, etc.
+
+st.markdown("## Markdown Section")
+
+st.markdown("""
+### Features of Streamlit
+- Easy to learn
+- Fast development
+- Python based
+- Great for dashboards
+""")
+
+# Bold text
+st.markdown("**This is bold text**")
+
+# Italic text
+st.markdown("*This is italic text*")
+
+# Button 
+
+if st.button("Click me"):
+    st.write("Button Clicked")
+
+agree = st.checkbox('I agree')
+if agree:
+    st.write("You agreed!")
+
+level = st.slider('Select a level:', 1, 10 ,5)
+st.write(f"Selected level is {level}")
+
+uploaded_file = st.file_uploader('Upload a File', type=["csv", "txt", 'pdf'])
+
+if uploaded_file is not None:
+    df = pd.read_csv(uploaded_file)
+    st.write(df.head())
+
+#-------------------------------------DETAILED NOTES--------------------------------------------
 
 
 # =========================================================
@@ -376,4 +438,4 @@ st.info("Information Message")
 # END OF APPLICATION
 # =========================================================
 
-st.write("Application Finished Successfully")
+st.write("Application Finished Successfully")   
