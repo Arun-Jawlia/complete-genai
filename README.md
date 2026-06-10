@@ -11,6 +11,8 @@
 
 From **Python Fundamentals** ➜ **Data Science** ➜ **Machine Learning** ➜ **Deep Learning** ➜ **NLP** ➜ **Transformers** ➜ **LLMs** ➜ **LangChain** ➜ **RAG** ➜ **AI Agents** ➜ **Production Deployment**
 
+</div>
+
 ---
 
 ## 🎯 Course Overview
