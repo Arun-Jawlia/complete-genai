@@ -22,7 +22,7 @@ print(data)
 x = data.index
 y = data.values
 
-# Create Bar  Plot
+# Create Vertical Bar  Plot
 plt.figure(figsize = ( 10, 5))
 
 plt.title("Distribution of Amount as Per Country")
@@ -32,6 +32,22 @@ plt.xlabel("Country")
 plt.ylabel("Amount")
 
 plt.bar(x, y, width = 0.5)
+
+plt.grid()
+
+plt.show()
+
+# ------------------------------------
+# Create Horizontal Bar  Plot
+plt.figure(figsize = ( 10, 5))
+
+plt.title("Distribution of Amount as Per Country")
+
+plt.xlabel("Country")
+
+plt.ylabel("Amount")
+
+plt.barh(x, y, width = 0.5)
 
 plt.grid()
 
