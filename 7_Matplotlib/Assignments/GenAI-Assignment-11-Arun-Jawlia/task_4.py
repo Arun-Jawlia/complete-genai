@@ -3,6 +3,7 @@
 
 import pandas as pd
 import matplotlib.pyplot as plt
+import numpy as np
 
 df = pd.read_csv('Chocolate Sales.csv')
 
@@ -40,6 +41,8 @@ d1.index = d1.index.sort_values()
 d2.index = d2.index.sort_values()
 d3.index = d3.index.sort_values()
 
+x=['January', 'February', 'March', 'April', 'May', 'June','July', 'August']
+
 # Create Multi Bar  Plot
 plt.figure(figsize=(12,4))
 
@@ -49,9 +52,10 @@ plt.xlabel("Month Name")
 
 plt.ylabel("Products")
 
-plt.bar(d1.index, d1.values, color='green', label = 'Mint Chip Choco')
-plt.bar(d2.index, d2.values, color='blue', label = 'Penaut Butter')
-plt.bar(d3.index, d3.values, color='red', label = '85% Dark Bars')
+plt.bar(np.arange(d1.shape[0]) - 0.2, d1.values, color='green', label = 'Mint Chip Choco', width = 0.2)
+plt.bar(np.arange(d2.shape[0]), d2.values, color='blue', label = 'Penaut Butter', width=0.2)
+plt.bar(np.arange(d3.shape[0]) + 0.2, d3.values, color='red', label = '85% Dark Bars', width=0.2)
+plt.xticks(np.arange(d1.shape[0]) - 0.2, x)
 
 plt.legend()
 
