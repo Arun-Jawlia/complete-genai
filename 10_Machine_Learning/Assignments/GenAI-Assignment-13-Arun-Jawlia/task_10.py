@@ -1,15 +1,17 @@
 '''
 Writing Observations
 
-1. Age is approx normally distributed with a slight right skew
+1. Most of the houses fall within 80k to 250k
 
-2. Balance column has outliers which is visible in box plot
+2. Highest value is around 140k to 180k
 
-3. student or people in higher education have higher balance than those with primary education
+3. Capped at 500k, observation has exactly this value
 
-4. Housing loan customer appeare more  than non housing loan customers
+4. Longitude range is approx -124 to -114
 
-5. Missing values were handled successfully before analysis.
+5. Latititude range is approx 32 to 42
 
-6. Dataset has no duplicates values
+6. Total Rooms has 207 null values
+
+7. No duplicates found
 '''

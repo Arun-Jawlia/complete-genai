@@ -6,7 +6,7 @@ Task 1 : Load Dataset From CSV
 
 import pandas as pd
 
-df = pd.read_csv("Bank_Data.csv")
+df = pd.read_csv("housing.csv")
 
 # Shape of the dataset
 print(df.shape)

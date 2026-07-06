@@ -5,39 +5,40 @@ Task 5: Understanding the Data
 
 import pandas as pd
 
-df = pd.read_csv('unclean.csv')
+df = pd.read_csv('housing.csv')
 
-print(df.shape)
+print( "Shapee",df.shape)
 
-print(df.head())
+print("Top 5 Rows" ,df.head())
 
-print(df.info())
+print( "Overall Datatypes",df.info())
 
-print(df.dtypes)
+print("Datatypes" ,df.dtypes)
 
-print(df.columns)
+print("Columns" ,df.columns)
 
-numerical_columns = ['PassengerId', 'Survived', 'Pclass','Age', 'SibSp',
-       'Parch', 'Ticket', 'Fare', 'Cabin',]
+numerical_columns = ['longitude', 'latitude', 'housing_median_age', 'total_rooms', 'total_bedrooms', 'population', 'households', 'median_income', 'median_house_value',]
 
-numerical_cols = df.select_dtypes(include=['int64', 'float64']).columns
+numerical_cols = df.select_dtypes(include=[float]).columns
 
-categorical_columns = ["Name",'Sex', 'Embarked']
+categorical_columns = ["ocean_proximity"]
 
-categorical_cols = df.select_dtypes(include=['object', 'category', 'bool']).columns
+categorical_cols = df.select_dtypes(include=['object', 'category',]).columns
 
 print(list(numerical_cols))
 
 print(list(categorical_cols))
 
-print(df['PassengerId'].isnull().sum())
-print(df['Survived'].isnull().sum())
-print(df['Pclass'].isnull().sum())
-print(df['Age'].isnull().sum())
-print(df['SibSp'].isnull().sum())
-print(df['Ticket'].isnull().sum())
-print(df['Parch'].isnull().sum())
-print(df['Fare'].isnull().sum())
-print(df['Cabin'].isnull().sum())
-print(df['Sex'].isnull().sum())
-print(df['Embarked'].isnull().sum())
+print(df['longitude'].isnull().sum())
+print(df['latitude'].isnull().sum())
+print(df['housing_median_age'].isnull().sum())
+print(df['total_rooms'].isnull().sum())
+print(df['total_bedrooms'].isnull().sum())
+print(df['population'].isnull().sum())
+print(df['households'].isnull().sum())
+print(df['median_income'].isnull().sum())
+print(df['median_house_value'].isnull().sum())
+print(df['ocean_proximity'].isnull().sum())
+
+
+# Only total_bedrooms has 207 null values

@@ -5,41 +5,102 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import numpy as np
 
-df = pd.read_csv("Bank_Data.csv")
+df = pd.read_csv("housing.csv")
 
 print(df.head())
 
+print(df.info())
+
 # Separate columns
-numerical_cols = df.select_dtypes(include=['int64', 'float64']).columns
-categorical_cols = df.select_dtypes(include=['object']).columns
+numerical_cols = df.select_dtypes(include=[np.number]).columns
+categorical_cols = df.select_dtypes(exclude=[np.number]).columns
 
-print(numerical_cols)
+print("Numerical Columns" ,numerical_cols)
+print("Categorical Columns" ,categorical_cols)
 
+
+print('Value Counts', df['ocean_proximity'].value_counts())
 # Univariate Analysis
-sns.histplot(data = df , x='Age')
-plt.title("Distributioni of Between age and population")
-plt.show()
-
-sns.kdeplot(data = df , x='Balance')
-plt.title("Distributioni of Between age and population")
-plt.show()
-
-
-print(categorical_cols)
-
-# Count plot for Categorical Columns
-sns.countplot(data = df, x ='Marital')
-plt.show()
-
-sns.countplot(data = df, x ='Education')
+# Use Count plt for Catgorical Columns
+# There is only category
+plt.figure(figsize=(10,3))
+sns.countplot(data = df, x='ocean_proximity')
 plt.show()
 
 
-# Outliers detection
-
-sns.boxplot(data = df, x ='Education')
+# Plot distribution of Numerical Columns ( histogram + KDE )
+plt.figure(figsize=(10,3))
+sns.histplot(data = df, x='longitude', kde=True)
 plt.show()
 
-sns.boxplot(data = df, x ='Marital')
+plt.figure(figsize=(10,3))
+sns.histplot(data = df, x='latitude', kde=True)
+plt.show()
+
+plt.figure(figsize=(10,3))
+sns.histplot(data = df, x='housing_median_age', kde=True)
+plt.show()
+
+plt.figure(figsize=(10,3))
+sns.histplot(data = df, x='total_rooms', kde=True)
+plt.show()
+
+plt.figure(figsize=(10,3))
+sns.histplot(data = df, x='total_bedrooms', kde=True)
+plt.show()
+
+plt.figure(figsize=(10,3))
+sns.histplot(data = df, x='population', kde=True)
+plt.show()
+
+plt.figure(figsize=(10,3))
+sns.histplot(data = df, x='households', kde=True)
+plt.show()
+
+plt.figure(figsize=(10,3))
+sns.histplot(data = df, x='median_income', kde=True)
+plt.show()
+
+plt.figure(figsize=(10,3))
+sns.histplot(data = df, x='median_house_value', kde=True)
+plt.show()
+
+
+#Outliers detection for Numerical Cols
+plt.figure(figsize=(10,3))
+sns.boxplot(data = df, x='longitude')
+plt.show()
+
+plt.figure(figsize=(10,3))
+sns.boxplot(data = df, x='latitude')
+plt.show()
+
+plt.figure(figsize=(10,3))
+sns.boxplot(data = df, x='housing_median_age')
+plt.show()
+
+plt.figure(figsize=(10,3))
+sns.boxplot(data = df, x='total_rooms')
+plt.show()
+
+plt.figure(figsize=(10,3))
+sns.boxplot(data = df, x='total_bedrooms')
+plt.show()
+
+plt.figure(figsize=(10,3))
+sns.boxplot(data = df, x='population')
+plt.show()
+
+plt.figure(figsize=(10,3))
+sns.boxplot(data = df, x='households')
+plt.show()
+
+plt.figure(figsize=(10,3))
+sns.boxplot(data = df, x='median_income')
+plt.show()
+
+plt.figure(figsize=(10,3))
+sns.boxplot(data = df, x='median_house_value')
 plt.show()
