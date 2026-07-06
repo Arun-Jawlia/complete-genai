@@ -4,19 +4,22 @@ Part 6: Data Cleaning
 
 import pandas as pd
 
-df = pd.read_csv('unclean.csv')
+df = pd.read_csv('housing.csv')
 
-print(df.shape)
+print( "Shapee",df.shape)
 
-print(df.head())
+print("Top 5 Rows" ,df.head())
 
-print(df.dtypes)
+print( "Overall Datatypes",df.info())
 
-print(df.info())
+print("Datatypes" ,df.dtypes)
+
+print("Columns" ,df.columns)
 
 # print(df.columns)
-df = df[['Survived', 'Pclass', 'Name', 'Sex', 'Age', 'SibSp',
-       'Parch', 'Ticket', 'Fare', 'Cabin', 'Embarked']]
+df = df[['longitude', 'latitude', 'housing_median_age', 'total_rooms',
+       'total_bedrooms', 'population', 'households', 'median_income',
+       'median_house_value', 'ocean_proximity']]
 
 print(df.describe())
 
@@ -26,27 +29,23 @@ print(df.drop_duplicates())
 
 print(df.isnull().sum())
 
-# Age Column has 86 null values
-print(df['Age'].isnull().sum())
-df['Age'] = df['Age'].fillna(df['Age'].mean())
-
-print(df['Age'].isnull().sum())
-
-# Cabin has 327 Missing Value
-print(df['Cabin'].isnull().sum())
-
-df['Cabin'] = df['Cabin'].fillna('Unknown')
-
-print(df['Cabin'].isnull().sum())
+print(df['longitude'].isnull().sum())
+print(df['latitude'].isnull().sum())
+print(df['housing_median_age'].isnull().sum())
+print(df['total_rooms'].isnull().sum())
+print(df['total_bedrooms'].isnull().sum())
+print(df['population'].isnull().sum())
+print(df['households'].isnull().sum())
+print(df['median_income'].isnull().sum())
+print(df['median_house_value'].isnull().sum())
+print(df['ocean_proximity'].isnull().sum())
 
 
-# Fare has 1 missing value
-print(df['Fare'].isnull().sum())
+# Analysis 
+# Only total_bedrooms has 207 null values and we can fill with median
 
-df['Fare'] = df['Fare'].fillna(df['Fare'].mean())
+df['total_bedrooms'] = df['total_bedrooms'].fillna(df['total_bedrooms'].median())
 
-print(df['Fare'].isnull().sum())
+print("Total Bedroom handled missing value using median", df['total_bedrooms'].isnull().sum())
 
 print(df.info())
-
-print(df.isnull().sum())

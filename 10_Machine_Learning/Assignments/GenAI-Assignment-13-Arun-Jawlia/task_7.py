@@ -1,50 +1,43 @@
-'''
-Task 7: Feature Engineering
-'''
-
 import pandas as pd
-from sklearn.preprocessing import LabelEncoder, OneHotEncoder, OrdinalEncoder
+from sklearn.preprocessing import LabelEncoder
 
-df = pd.read_csv('Bank_Data.csv')
+# Load dataset
+df = pd.read_csv("online_retail.csv")
+
 
 print(df.head())
 
-# print(df.info())
+# Convert InvoiceDate to datetime
+df["InvoiceDate"] = pd.to_datetime(df["InvoiceDate"])
+
+# Extract useful date features
+df["Year"] = df["InvoiceDate"].dt.year
+df["Month"] = df["InvoiceDate"].dt.month
+df["Day"] = df["InvoiceDate"].dt.day
+df["Hour"] = df["InvoiceDate"].dt.hour
+
+# Drop original date column
+df.drop("InvoiceDate", axis=1, inplace=True)
+
+# Label Encoding
 le = LabelEncoder()
-oe = OrdinalEncoder()
-ohe = OneHotEncoder()
 
-# Label Encoding on Binary Cols
-df["Default"] = le.fit_transform(df["Default"])
-df["Housing"] = le.fit_transform(df["Housing"])
-df["Loan"] = le.fit_transform(df["Loan"])
-df["TARGET"] = le.fit_transform(df["TARGET"])
+categorical_cols = [
+    "InvoiceNo",
+    "StockCode",
+    "Description",
+    "Country"
+]
 
-# Ordinal Encoder 
-education_order = [['unknown', 'primary', 'secondary', 'tertiary']]
-oe = OrdinalEncoder(categories = education_order)
-df[['Education']] = oe.fit_transform(df[['Education']])
+for col in categorical_cols:
+    df[col] = le.fit_transform(df[col].astype(str))
 
-# Nominal Encoding
-nominal_cols = ['Job', 'Marital','contact', 'Month', 'poutcome']
-ohe = OneHotEncoder(sparse_output=False, handle_unknown = 'ignore')
-encoded = ohe.fit_transform(df[nominal_cols])
-encoded_df = pd.DataFrame(
-    encoded,
-    columns=ohe.get_feature_names_out(nominal_cols)
-)
-
-df = df.drop(columns=nominal_cols)
-
-df = pd.concat(
-    [df, encoded_df],
-    axis=1
-)
+# Separate Features and Target
+X = df.drop("Quantity", axis=1)
+Y = df["Quantity"]
 
 print(df.head())
 
-X = df.drop("TARGET", axis=1)
-Y = df["TARGET"]
 
 print("Features Shape :", X.shape)
 print("Target Shape   :", Y.shape)
