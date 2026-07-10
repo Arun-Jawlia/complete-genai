@@ -183,4 +183,4 @@ Become a Production-Ready **Generative AI Engineer** capable of building:
 
 ### ⭐ Learning • Building • Sharing • Growing
 
-**"From Concepts to Code — Mastering Generative AI One Project at a Time."**
+**Mastering Generative AI**
