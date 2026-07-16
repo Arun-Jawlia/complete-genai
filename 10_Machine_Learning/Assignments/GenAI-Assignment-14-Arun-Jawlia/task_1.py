@@ -1,6 +1,13 @@
 
 # PART 1 FEATURE ENGINEERING
 # CREATING NEW FEATURES
+'''
+Dataset Name: Sales Data
+Link: https://www.kaggle.com/datasets/atharvasoundankar/chocolate-sales
+
+Target Column: Amount
+
+'''
 
 import pandas as pd
 import numpy as np
@@ -8,11 +15,13 @@ import numpy as np
 df  = pd.read_csv('data.csv')
 
 print(df.head())
+print(df.info())
 
-#  Convert Amount to Numeric
+print(df['Product'].value_counts())
+print(df['Product'].unique())
 
+# Convert Amount to Numeric
 df['Amount'] = df['Amount'].str.replace('$', '', regex=False).str.replace(',', '').astype(float)
-
 
 # Add new Feature : Price per Box
 df['Price Per Box'] = df['Amount'] / df['Boxes Shipped']
