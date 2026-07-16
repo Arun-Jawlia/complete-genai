@@ -13,23 +13,22 @@ Target Column: Amount
 import pandas as pd
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder
+from sklearn.impute import  SimpleImputer
 
 df  = pd.read_csv('data.csv')
 
 print(df.head())
 print(df.info())
 
-target_column = ['Amount']
-numerical_features = ['Amount','Boxes Shipped']
+df['Amount'] = df['Amount'].str.replace('$', '', regex=False).str.replace(',', '').astype(float)
+
+numerical_features = ['Boxes Shipped', 'Amount']
 categorical_features = ["Sales Person","Country","Product"]
 
 preprocessor = ColumnTransformer(
     transformers = [
-        (
-            'categorical',
-            OneHotEncoder(handle_unknown='ignore'),
-            categorical_features
-        )
+        ('numerical features',SimpleImputer(strategy='median'),numerical_features),
+        ('categorical features',OneHotEncoder(handle_unknown='ignore'),categorical_features)
     ]
 )
 

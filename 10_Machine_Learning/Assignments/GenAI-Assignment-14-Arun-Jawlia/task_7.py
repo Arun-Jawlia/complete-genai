@@ -35,41 +35,22 @@ categorical_features = ["Sales Person","Country","Product"]
 
 numerical_pipeline = Pipeline(
     steps = [
-        (
-            "imputer", SimpleImputer(strategy='median')
-        ),
-        (
-            'scaler', StandardScaler()
-        )
+        ("imputer", SimpleImputer(strategy='median'))
+        ,
+        ('scaler', StandardScaler())
     ]
 )
 categorical_pipeline = Pipeline(
     steps = [
-        (
-            "imputer", SimpleImputer(strategy='most_frequent')
+        ("imputer", SimpleImputer(strategy='most_frequent')
         ),
-        (
-            'encoder',OneHotEncoder(handle_unknown='ignore')
-        )
+        ('encoder',OneHotEncoder(handle_unknown='ignore'))
     ]
 )
 
-preprocessor = ColumnTransformer(
+features = ColumnTransformer(
     transformers = [
-        (
-            'numerical',
-            numerical_pipeline,
-            numerical_features
-        ),
-        (
-            'categorical',
-            categorical_pipeline,
-            categorical_features
-        )
+        ('numerical',numerical_pipeline, numerical_features),
+        ('categorical',categorical_pipeline,categorical_features)
     ]
 )
-
-X = preprocessor.fit_transform(df)
-
-print("Original Shape :", df.shape)
-print("Processed Shape :", X.shape)

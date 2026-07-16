@@ -34,14 +34,11 @@ categorical_features = ["Sales Person","Country","Product"]
 
 scaled_data = ss.fit_transform(df[numerical_features])
 
-scaled_df = pd.DataFrame(
-    scaled_data,
-    columns=numerical_features
-)
+scaled_data = pd.DataFrame(scaled_data,columns=numerical_features)
 
-print(scaled_df.head())
-print("Mean Value",scaled_df.mean())
-print("Standard Deviation" ,scaled_df.std())
+print(scaled_data.head())
+print("Mean Value",scaled_data.mean())
+print("Standard Deviation" ,scaled_data.std())
 
 '''
 Mean becomes ~ 0

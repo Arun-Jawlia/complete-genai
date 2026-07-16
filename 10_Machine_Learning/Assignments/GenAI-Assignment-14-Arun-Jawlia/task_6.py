@@ -50,3 +50,12 @@ print('Minmax')
 print(scaled_minmax_df.head())
 print("Standard Scaler")
 print(scaled_std_df.head())
+
+
+'''
+Compare output with Standard Scaler
+
+Standard Scaler : mean becomes approx 0 , In MinMaxscaler, valures are between 0 and 1
+In standard Scaler: values can be -ve, In MinMaxScaler, values are never less than  0 or greater than 1
+
+'''

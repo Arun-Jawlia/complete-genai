@@ -10,9 +10,9 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.preprocessing import StandardScaler,OneHotEncoder
 from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_absolute_error
+from sklearn.metrics import mean_absolute_error,mean_squared_error,r2_score
 from sklearn.impute import SimpleImputer
 
 df = pd.read_csv("data.csv")
@@ -35,57 +35,44 @@ df.drop("Date", axis=1, inplace=True)
 numerical_features = [ 'Year', "Month", 'Day','Boxes Shipped']
 categorical_features = ["Sales Person","Country","Product","Day Name"]
 
-X = df.drop("Amount", axis = 1)
-y = df["Amount"]
-
-print(X.isnull().sum()) # No null values
-
-
-X_train, X_test, y_train, y_test = train_test_split(
-    X,y,test_size=0.2, random_state=42
-)
-
-print(X_train.shape)
-print(X_test.shape)
-
 # pipeline
-numeric_pipeline = Pipeline(
+Numeric_Pipeline = Pipeline(
     steps=[
-        (
-            "imputer", SimpleImputer(strategy='median')
-        ),
-        (
-            "scaler",StandardScaler()
-        )
+        ("imputer", SimpleImputer(strategy='median')),
+        ("scaling",StandardScaler())
     ]
 )
 
-categorical_pipeline = Pipeline(
+Categorical_Pipeline = Pipeline(
     steps=[
-        (
-            "imputer", SimpleImputer(strategy='most_frequent')
-        ),
-        (
-            "encoder",OneHotEncoder(handle_unknown="ignore")
-        )
+        ("imputer", SimpleImputer(strategy='most_frequent')),
+        ("encoder",OneHotEncoder(handle_unknown="ignore"))
     ]
 )
-
-preprocessor = ColumnTransformer(
+# Combine Pipeline Transformer
+features = ColumnTransformer(
     transformers=[
-        ("numerical", numeric_pipeline, numerical_features),
-        ("categorical", categorical_pipeline, categorical_features)
+        ("numeric transformation", Numeric_Pipeline, numerical_features),
+        ("categorical transformation", Categorical_Pipeline, categorical_features)
     ]
 )
 
-model_pipeline = Pipeline(
-    steps=[
-        ("preprocessor", preprocessor),
-        ("regressor", LinearRegression())
-    ]
+model = Pipeline(
+    steps=[("features", features),("regressor", LinearRegression())]
 )
 
-model = model_pipeline.fit(X_train, y_train)
-y_predicted = model.predict(X_test)
 
-print("Accuracy :", mean_absolute_error(y_test, y_predicted))
+print(model)
+
+X = df.drop("Amount", axis= 1)
+Y = df['Amount']
+
+
+X_train, X_test, Y_train, Y_test  = train_test_split(X,Y, test_size=0.2)
+
+model.fit(X_train, Y_train)
+
+Y_predict = model.predict(X_test)
+print(mean_absolute_error(Y_test,  Y_predict))
+print(mean_squared_error(Y_test, Y_predict))
+print(r2_score(Y_test,Y_predict))
