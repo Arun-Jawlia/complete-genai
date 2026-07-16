@@ -7,13 +7,12 @@ import pandas as pd
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder
 
-df  = pd.read_csv('online_retail.csv')
+df  = pd.read_csv('data.csv')
 
 print(df.head())
-
 print(df.info())
 
-numerical_features = ['Quantity', 'UnitPrice', 'CustomerID']
+numerical_features = ['Amount', 'Boxes Shipped']
 
 categorical_features = [
     "InvoiceNo",
