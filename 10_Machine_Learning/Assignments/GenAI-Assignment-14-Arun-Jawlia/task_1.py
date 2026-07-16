@@ -1,6 +1,6 @@
 
 # PART 1 FEATURE ENGINEERING
-# CREATING NEW FEATURES
+# Task 1: CREATING NEW FEATURES
 '''
 Dataset Name: Sales Data
 Link: https://www.kaggle.com/datasets/atharvasoundankar/chocolate-sales

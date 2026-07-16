@@ -1,6 +1,13 @@
 
 # PART 1 FEATURE ENGINEERING
-# Task2: Handing Data and Text Features ( if Available)
+# Task 2: Handing Data and Text Features ( if Available)
+'''
+Dataset Name: Sales Data
+Link: https://www.kaggle.com/datasets/atharvasoundankar/chocolate-sales
+
+Target Column: Amount
+
+'''
 
 import pandas as pd
 import numpy as np

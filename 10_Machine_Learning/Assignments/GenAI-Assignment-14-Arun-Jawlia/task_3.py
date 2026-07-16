@@ -1,6 +1,13 @@
 
 # PART 2 Feature Encoding
-# Handing Data and Text Features 
+# Task3: One Hot Encoding
+'''
+Dataset Name: Sales Data
+Link: https://www.kaggle.com/datasets/atharvasoundankar/chocolate-sales
+
+Target Column: Amount
+
+'''
 
 import pandas as pd
 import numpy as np
