@@ -1,7 +1,14 @@
 
 '''
-Task 4: Column Transformer
+Task 4: Column Transformer ( Recommended way)
+
+Dataset Name: Sales Data
+Link: https://www.kaggle.com/datasets/atharvasoundankar/chocolate-sales
+
+Target Column: Amount
+
 '''
+
 
 import pandas as pd
 from sklearn.compose import ColumnTransformer
@@ -12,15 +19,9 @@ df  = pd.read_csv('data.csv')
 print(df.head())
 print(df.info())
 
-numerical_features = ['Amount', 'Boxes Shipped']
-
-categorical_features = [
-    "InvoiceNo",
-    "StockCode",
-    "Description",
-    "InvoiceDate",
-    "Country"
-]
+target_column = ['Amount']
+numerical_features = ['Amount','Boxes Shipped']
+categorical_features = ["Sales Person","Country","Product"]
 
 preprocessor = ColumnTransformer(
     transformers = [

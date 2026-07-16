@@ -1,46 +1,45 @@
 
-import pandas as pd
+'''
+Dataset Name: Sales Data
+Link: https://www.kaggle.com/datasets/atharvasoundankar/chocolate-sales
 
+Target Column: Amount
+
+'''
+import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
-from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import accuracy_score, classification_report
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_absolute_error
+from sklearn.impute import SimpleImputer
 
-df = pd.read_csv("online_retail.csv")
+df = pd.read_csv("data.csv")
 
+print(df.shape)
 print(df.head())
-print(df.info())
+print(df.info()) 
 
-# Target 
-df['HighQuantity'] = (df['Quantity'] > 10).astype(int)
-print(df["HighQuantity"].value_counts())
+# Convert Amount to Numeric
+df['Amount'] = df['Amount'].str.replace('$', '', regex=False).str.replace(',', '').astype(float)
+# Date
+df['Date'] = pd.to_datetime(df['Date'], dayfirst=True)
+df['Year'] = df['Date'].dt.year
+df['Month'] = df['Date'].dt.month
+df['Day'] = df['Date'].dt.day
+df['Day Name'] = df['Date'].dt.day_name
+df.drop("Date", axis=1, inplace=True)
 
-# Feature Engineering
-df["InvoiceDate"] = pd.to_datetime(df["InvoiceDate"])
-df["Month"] = df["InvoiceDate"].dt.month
-df["Hour"] = df["InvoiceDate"].dt.hour
-df["Weekday"] = df["InvoiceDate"].dt.dayofweek
+# Categories feature
+numerical_features = [ 'Year', "Month", 'Day','Boxes Shipped']
+categorical_features = ["Sales Person","Country","Product","Day Name"]
 
-X = df[
-    [
-        "UnitPrice",
-        "CustomerID",
-        "Country",
-        "Month",
-        "Hour",
-        "Weekday"
-    ]
-]
+X = df.drop("Amount", axis = 1)
+y = df["Amount"]
 
-y = df["HighQuantity"]
+print(X.isnull().sum()) # No null values
 
-print(X.isnull().sum())
-
-X['CustomerID'] = X['CustomerID'].fillna(X['CustomerID'].median())
-
-print(X.isnull().sum())
 
 X_train, X_test, y_train, y_test = train_test_split(
     X,y,test_size=0.2, random_state=42
@@ -49,23 +48,14 @@ X_train, X_test, y_train, y_test = train_test_split(
 print(X_train.shape)
 print(X_test.shape)
 
-numerical_features = [
-    "UnitPrice",
-    "CustomerID",
-    "Month",
-    "Hour",
-    "Weekday"
-]
-
-categorical_features = [
-    "Country"
-]
-
+# pipeline
 numeric_pipeline = Pipeline(
     steps=[
         (
-            "scaler", 
-            StandardScaler()
+            "imputer", SimpleImputer(strategy='median')
+        ),
+        (
+            "scaler",StandardScaler()
         )
     ]
 )
@@ -73,8 +63,10 @@ numeric_pipeline = Pipeline(
 categorical_pipeline = Pipeline(
     steps=[
         (
-            "encoder", 
-            OneHotEncoder(handle_unknown="ignore")
+            "imputer", SimpleImputer(strategy='most_frequent')
+        ),
+        (
+            "encoder",OneHotEncoder(handle_unknown="ignore")
         )
     ]
 )
@@ -89,13 +81,11 @@ preprocessor = ColumnTransformer(
 model_pipeline = Pipeline(
     steps=[
         ("preprocessor", preprocessor),
-        ("classifier", LogisticRegression(max_iter=1000))
+        ("regressor", LinearRegression())
     ]
 )
 
-model_pipeline.fit(X_train, y_train)
+model = model_pipeline.fit(X_train, y_train)
+y_predicted = model.predict(X_test)
 
-y_pred = model_pipeline.predict(X_test)
-
-print("Accuracy :", accuracy_score(y_test, y_pred))
-print(classification_report(y_test, y_pred))
+print("Accuracy :", mean_absolute_error(y_test, y_predicted))
