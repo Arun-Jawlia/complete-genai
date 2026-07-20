@@ -1,78 +1,29 @@
 
 '''
-Dataset Name: Sales Data
-Link: https://www.kaggle.com/datasets/atharvasoundankar/chocolate-sales
-
-Target Column: Amount
+Task 8: Bias and Variance(Conceptual)
+'''
 
 '''
-import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.compose import ColumnTransformer
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import StandardScaler,OneHotEncoder
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_absolute_error,mean_squared_error,r2_score
-from sklearn.impute import SimpleImputer
-
-df = pd.read_csv("data.csv")
-
-print(df.shape)
-print(df.head())
-print(df.info()) 
-
-# Convert Amount to Numeric
-df['Amount'] = df['Amount'].str.replace('$', '', regex=False).str.replace(',', '').astype(float)
-# Date
-df['Date'] = pd.to_datetime(df['Date'], dayfirst=True)
-df['Year'] = df['Date'].dt.year
-df['Month'] = df['Date'].dt.month
-df['Day'] = df['Date'].dt.day
-df['Day Name'] = df['Date'].dt.day_name
-df.drop("Date", axis=1, inplace=True)
-
-# Categories feature
-numerical_features = [ 'Year', "Month", 'Day','Boxes Shipped']
-categorical_features = ["Sales Person","Country","Product","Day Name"]
-
-# pipeline
-Numeric_Pipeline = Pipeline(
-    steps=[
-        ("imputer", SimpleImputer(strategy='median')),
-        ("scaling",StandardScaler())
-    ]
-)
-
-Categorical_Pipeline = Pipeline(
-    steps=[
-        ("imputer", SimpleImputer(strategy='most_frequent')),
-        ("encoder",OneHotEncoder(handle_unknown="ignore"))
-    ]
-)
-# Combine Pipeline Transformer
-features = ColumnTransformer(
-    transformers=[
-        ("numeric transformation", Numeric_Pipeline, numerical_features),
-        ("categorical transformation", Categorical_Pipeline, categorical_features)
-    ]
-)
-
-model = Pipeline(
-    steps=[("features", features),("regressor", LinearRegression())]
-)
+1. What is bias in ML Models?
+- Bias is the error caused by a model making overly simple assumptions, tells us how worng the model is during training
+- also called training error caused by a model being too simple
 
 
-print(model)
+2. What is Variance?
+- it is eeror caused by the model changing too much when given training data, tell us how unstable model is.
+- variance is testing erro caused by a model being too sensitive to training data
 
-X = df.drop("Amount", axis= 1)
-Y = df['Amount']
+
+3. How do bias and variance relate to underfitting and overfitting?
+- Underfitting: High Bias, Low Variance ---> Lead to Underfitting
+- Too complex:  Low Bias, High Variance ---> Lead to Overfitting 
+- Overfitting:  low Bias , Low Variance ---> lead to generalized model
 
 
-X_train, X_test, Y_train, Y_test  = train_test_split(X,Y, test_size=0.2)
+4. How can we reduce overfitting
+- Simplifying the model
+- Collect more data 
+- remove unnecessary features
+- using cross validation
 
-model.fit(X_train, Y_train)
-
-Y_predict = model.predict(X_test)
-print(mean_absolute_error(Y_test,  Y_predict))
-print(mean_squared_error(Y_test, Y_predict))
-print(r2_score(Y_test,Y_predict))
+'''
