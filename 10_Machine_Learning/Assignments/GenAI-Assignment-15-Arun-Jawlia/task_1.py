@@ -1,7 +1,7 @@
 
-# PART 1 Regression Algorithm
-# Task 1: Linear Regression
 '''
+PART 1 Regression Algorithm
+Task 1: Linear Regression
 Dataset Name: Sales Data 
 Type: Regression
 Link: https://www.kaggle.com/datasets/atharvasoundankar/chocolate-sales
@@ -42,6 +42,7 @@ categorical_features = ["Sales Person","Country","Product","Day Name"]
 print(df.isnull().sum()) # No null values
 print(df.duplicated().sum()) # No Duplicates
 
+
 # pipeline
 Numeric_Pipeline = Pipeline(
     steps=[
@@ -56,20 +57,19 @@ Categorical_Pipeline = Pipeline(
         ("encoder",OneHotEncoder(handle_unknown="ignore"))
     ]
 )
+
+
 # Combine Pipeline Transformer
-features = ColumnTransformer(
+regression_features = ColumnTransformer(
     transformers=[
         ("numeric transformation", Numeric_Pipeline, numerical_features),
         ("categorical transformation", Categorical_Pipeline, categorical_features)
     ]
 )
 
-model = Pipeline(
-    steps=[("features", features),("regressor", LinearRegression())]
+model_linear_regression = Pipeline(
+    steps=[("features", regression_features),("regressor", LinearRegression())]
 )
-
-
-print(model)
 
 X = df.drop("Amount", axis= 1)
 Y = df['Amount']
@@ -81,9 +81,9 @@ print(X_test.shape)
 print(Y_train.shape)
 print(Y_test.shape)
 
-model.fit(X_train, Y_train)
+model_linear_regression.fit(X_train, Y_train)
 
-Y_predict = model.predict(X_test)
+Y_predict = model_linear_regression.predict(X_test)
 
 print("Actual value" ,Y_test.head())
 print("Predicted values" ,Y_predict[:5])

@@ -20,19 +20,19 @@ from sklearn.metrics import (
     accuracy_score,
     f1_score,
     recall_score,
-    precision_score
+    precision_score,
+    classification_report
 )
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.naive_bayes import GaussianNB
+from sklearn.metrics import confusion_matrix
 
 df  = pd.read_csv('data_classification.csv')
 
-# print(df.head())
-# print(df.shape)
-# print(df.columns)
-# print(df.dtypes)
-# print(df.info())
+print(df.head())
+print(df.shape)
+print(df.info())
 
 print(df.isnull().sum())
 
@@ -51,14 +51,14 @@ numerical_features = ["Pclass","Age","SibSp","Parch","Fare"]
 categorical_features = ["Sex","Embarked"]
 
 # pipeline
-Numeric_Pipeline = Pipeline(
+num_pipeline = Pipeline(
     steps=[
         ("imputer", SimpleImputer(strategy='median')),
         ("scaling",StandardScaler())
     ]
 )
 
-Categorical_Pipeline = Pipeline(
+cat_pipeline = Pipeline(
     steps=[
         ("imputer", SimpleImputer(strategy='most_frequent')),
         ("encoder",OneHotEncoder(handle_unknown="ignore"))
@@ -68,8 +68,8 @@ Categorical_Pipeline = Pipeline(
 # Combine Pipeline Transformer
 features = ColumnTransformer(
     transformers=[
-        ("numeric transformation", Numeric_Pipeline, numerical_features),
-        ("categorical transformation", Categorical_Pipeline, categorical_features)
+        ("numeric transformation", num_pipeline, numerical_features),
+        ("categorical transformation", cat_pipeline, categorical_features)
     ]
 )
 
@@ -120,7 +120,7 @@ model_Gaussian_NB.fit(X_train, Y_train)
 knn_model.fit(X_train, Y_train)
 logistic_pred = model_logistic_Regresson.predict(X_test)
 gaussion_pred = model_Gaussian_NB.predict(X_test)
-knn_pred = model_Gaussian_NB.predict(X_test)
+knn_pred = knn_model.predict(X_test)
 
 
 logistic_metrics = {
@@ -153,3 +153,18 @@ comparison = pd.DataFrame({
 })
 
 print(comparison)
+
+
+# Confusion Matrix 
+logistic_confusion_matrix = confusion_matrix(Y_test, logistic_pred)
+gaussian_confusion_matrix =confusion_matrix(Y_test, gaussion_pred)
+knn_confusion_matrix = confusion_matrix(Y_test, knn_pred)
+
+print(logistic_confusion_matrix)
+print(gaussian_confusion_matrix)
+print(knn_confusion_matrix)
+
+# Classification report
+print(classification_report(Y_test,logistic_pred))
+print(classification_report(Y_test,gaussion_pred))
+print(classification_report(Y_test,knn_pred))
