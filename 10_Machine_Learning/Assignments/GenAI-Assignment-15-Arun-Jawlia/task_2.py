@@ -1,7 +1,7 @@
 
+'''
 # PART 1 Regression Algorithm
 # Task 1: Regression Evaluation Metrics
-'''
 Dataset Name: Sales Data
 Link: https://www.kaggle.com/datasets/atharvasoundankar/chocolate-sales
 
@@ -24,6 +24,8 @@ from sklearn.metrics import (
 
 df  = pd.read_csv('data_regression.csv')
 
+
+
 print(df.head())
 print(df.shape)
 print(df.info())
@@ -44,6 +46,7 @@ categorical_features = ["Sales Person","Country","Product","Day Name"]
 
 print(df.isnull().sum()) # No null values
 print(df.duplicated().sum()) # No Duplicates
+
 
 # pipeline
 Numeric_Pipeline = Pipeline(
@@ -67,26 +70,19 @@ features = ColumnTransformer(
     ]
 )
 
-model = Pipeline(
+linear_regression_model = Pipeline(
     steps=[("features", features),("regressor", LinearRegression())]
 )
 
-
-print(model)
 
 X = df.drop("Amount", axis= 1)
 Y = df['Amount']
 
 X_train, X_test, Y_train, Y_test  = train_test_split(X,Y, test_size=0.2)
 
-print(X_train.shape)
-print(X_test.shape)
-print(Y_train.shape)
-print(Y_test.shape)
+linear_regression_model.fit(X_train, Y_train)
 
-model.fit(X_train, Y_train)
-
-Y_predict = model.predict(X_test)
+Y_predict = linear_regression_model.predict(X_test)
 
 print("Mean Absolute error", mean_absolute_error(Y_test, Y_predict))
 print("Mean sqaured error", mean_squared_error(Y_test, Y_predict))

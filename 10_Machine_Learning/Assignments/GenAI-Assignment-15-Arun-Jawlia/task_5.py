@@ -23,8 +23,6 @@ df  = pd.read_csv('data_classification.csv')
 
 print(df.head())
 print(df.shape)
-print(df.columns)
-print(df.dtypes)
 print(df.info())
 
 print(df.isnull().sum())
@@ -59,7 +57,7 @@ Categorical_Pipeline = Pipeline(
 )
 
 # Combine Pipeline Transformer
-features = ColumnTransformer(
+preprocessor = ColumnTransformer(
     transformers=[
         ("numeric transformation", Numeric_Pipeline, numerical_features),
         ("categorical transformation", Categorical_Pipeline, categorical_features)
@@ -78,7 +76,7 @@ result = {}
 for k in k_values:
     model = Pipeline(
         steps= [
-            ('features',features), ('knn', KNeighborsClassifier(n_neighbors = k))
+            ('preprocessor',preprocessor), ('knn_classifier', KNeighborsClassifier(n_neighbors = k))
         ]
     )
 
