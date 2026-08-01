@@ -1,26 +1,3 @@
-[
-    {
-        "id": 1,
-        "name": "Alice",
-        "department": "HR",
-        "salary": 50000
-    },
-    {
-        "id": 2,
-        "name": "Bob",
-        "department": "IT",
-        "salary": 65000
-    },
-    {
-        "id": 3,
-        "name": "Charlie",
-        "department": "Finance",
-        "salary": 60000
-    },
-    {
-        "id": 4,
-        "name": "David",
-        "department": "Marketing",
-        "salary": 55000
-    }
-]
+version https://git-lfs.github.com/spec/v1
+oid sha256:927412121aea0a8752640e07b28f11610f32850f3b8a68788e6e1cb685d08175
+size 467
