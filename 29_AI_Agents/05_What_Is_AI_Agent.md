@@ -6,6 +6,10 @@ An **AI Agent** is an AI system that can:
 
 > **Understand a goal → reason about what needs to be done → decide which actions/tools to use → execute those actions → observe the results → continue until the goal is achieved.**
 
+Or
+
+> **An AI Agent is an Intelligence system that recieves a High Level Goal from the user, and Autonomsly Decides and executes a sequence of actions by using External Tools, APIs, Knowledge-source all while maintaining the context , Reasoning over the Multiple steps and adapting to New information and optimizing for the intended outcome**
+
 A traditional LLM primarily **generates a response**.
 
 An AI Agent can **take action**.
@@ -1014,6 +1018,8 @@ rather than just:
 
 ### 2. Autonomous decision-making
 
+Agent break down the Problem into Sequences task on its own
+
 The system decides:
 
 ```text
@@ -1023,6 +1029,8 @@ What should happen next?
 ```
 
 ### 3. Tool usage
+
+Agent call APIs, Calculators, Search Tools etch
 
 The system interacts with external systems.
 
@@ -1034,13 +1042,17 @@ The system can execute:
 Action → Result → Next Action
 ```
 
-### 5. State
+### 5. State / Context
 
 The system tracks what has happened.
 
-### 6. Adaptation
+Maintain memory across steps to inform future actions
+
+### 6. Adaptative
 
 The next action can depend on previous results.
+
+Rethinks plan when things change
 
 ---
 
