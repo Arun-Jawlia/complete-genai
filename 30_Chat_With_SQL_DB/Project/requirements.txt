@@ -1,0 +1,12 @@
+langchain-openai
+langchain
+langchain-classic
+python-dotenv
+langchain-community
+langchain-core
+streamlit
+langchain-groq
+mysql-connector-python
+faiss-cpu
+pypdf
+langchain-chroma
