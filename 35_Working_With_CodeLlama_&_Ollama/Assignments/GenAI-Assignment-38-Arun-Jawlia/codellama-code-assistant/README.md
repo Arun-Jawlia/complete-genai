@@ -13,7 +13,7 @@ The application can:
 
 * Python
 * Ollama
-* CodeLlama 7B
+* CodeLlama:latest
 * Streamlit
 
 ## Project Structure
@@ -23,7 +23,9 @@ CodeLlama_Assignment/
 │
 ├── app.py
 ├── assistant.py
-├── prompts.py
+├── prompts_helper.py
+├── verify_ollama_model.py
+├── test.py
 ├── requirements.txt
 └── README.md
 ```
@@ -47,47 +49,17 @@ Prompt Template
     ↓
 Ollama
     ↓
-CodeLlama 7B
+CodeLlama Latest
     ↓
 Generated Response
     ↓
 Streamlit UI
 ```
 
-## Available Tasks
-
-### Generate Code
-
-Enter a programming requirement and CodeLlama generates Python code.
-
-### Explain Code
-
-Enter Python code and the assistant explains what the code does.
-
-### Debug Code
-
-Enter code containing an error and the assistant identifies the problem and suggests a correction.
-
-### Optimize Code
-
-Enter existing code and the assistant suggests improvements for readability and performance.
-
-## Example
-
-**Prompt:**
-
-```text
-Write a Python function to check whether a number is prime.
-```
-
-**Task:**
-
-```text
-Generate Code
-```
-
-The application sends the prompt to CodeLlama through Ollama and displays the generated response.
-
-## Note
-
-This project runs CodeLlama **locally through Ollama**, so the prompts and responses do not need to be sent to a cloud LLM API.
+# How To Run
+1. First Install Ollama on your system 
+2. Pull Codellama using `ollama pull codellama:latest`
+3. Unzip the folder
+4. Checkout to folder: `GenAI-Assignment-38-Arun-Jawlia/codellama-code-assistant`
+5. Run the project `streamlit run app.py`
+6. Open the local URL in your browser: ` http://localhost:8501`

@@ -1,6 +1,6 @@
-from assistant import generate_response
+from verify_ollama_model import verify_model
 
-response = generate_response(
+response = verify_model(
     "Write a Python function to check prime numbers."
 )
 

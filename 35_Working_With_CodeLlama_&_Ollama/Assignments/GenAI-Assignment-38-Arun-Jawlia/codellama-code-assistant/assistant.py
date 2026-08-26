@@ -1,88 +1,38 @@
 #pylint: disable = all
-from ollama import chat
 
-MODEL_NAME = 'codellama:latest'
+from langchain_ollama import ChatOllama
+from prompts_helper import (
+    code_explanation_prompt,
+    code_generation_prompt,
+    code_optimization_prompt,
+    code_bug_fixing_prompt
+)
 
 def generate_response(prompt):
-    response = chat(
-        model=MODEL_NAME,
-        messages=[
-            {
-                "role": "user",
-                "content": prompt
-            }
-        ]
+    llm = ChatOllama(
+        model='codellama:latest',
+        temperature=0.5
     )
 
-    return response.message.content
+    response = llm.invoke(prompt)
+    return response.content
 
-
-def generate_code(prompt):
-    prompt = f"""
-    
-    Act as a expert Python Developer.
-
-    Task: Generate Python Code
-
-    User Requirement:
-    {prompt}
-
-    Instructions:
-    - Write Clean Python Code
-    - Use meaningful variables names
-    - follow best practice
-    - include comments only where useful
-    - return the complete solution
-    
-    """
-
-    return generate_response(prompt)
-
-def generate_code_explanation(code):
-    prompt = f"""
-    
-    Act as a expert Python Developer.
-
-    Task: Explain the following code in Simple English Language
-
-    Code:
-    {code}
-    
-    """
-
-    return generate_response(prompt)
-
-def generate_code_bug_fixing(code):
-    prompt = f"""
-    
-    Act as a expert Python Developer.
-
-    Task: 
-    - Find the bugs in the following code
-    - Explain the issue
-    - Provide Corrected Code
-
-    Code:
-    {code}
-    """
-
-    return generate_response(prompt)
-
-def generate_code_optimization_suggestion(code):
-    prompt = f"""
-    
-    Act as a expert Python Developer.
-
-    Task: 
-    - Optimize the Code
-    - Improve Readibility
-    - Improver performance
-    - Return Optimized code
-
-    Code:
-    {code}
-    """
+def code_generation(prompt):
+    prompt = code_generation_prompt.format(input = prompt)
 
     return generate_response(prompt)
 
 
+def code_explaination(code):
+    prompt = code_explanation_prompt.format(code = code)
+    return generate_response(prompt)
+
+def code_bug_fixing(code):
+    prompt = code_bug_fixing_prompt.format(code=code)
+
+    return generate_response(prompt)
+
+
+def code_optimization(code):
+    prompt = code_optimization_prompt.format(code=code)
+    return generate_response(prompt)
