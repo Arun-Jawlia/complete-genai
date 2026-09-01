@@ -1,0 +1,14 @@
+
+Question 1: Why AstraDB is useful for production Rag
+- It is a cloud based vector database , used for store and search embeddings efficiently
+- Provides scalable infrastructure and similarity search
+- making it more suitable for production
+
+
+Question 2: Importance of session state in GenAI apps
+- Session state is important in GenAI apps because it allows Streamlit to maintain info between user interactions
+- In my application, session state store the vector store , procession status, and indexes so user can ask multiple question without processing the pdf again and again
+
+Question 3: Difference between FAISS and AstraDB
+- FAISS is Vector similarity search library , while AstraDB is a cloud based vector database
+- FAISS is simple and used locally , while AstraDB need more setup and managed cloud database

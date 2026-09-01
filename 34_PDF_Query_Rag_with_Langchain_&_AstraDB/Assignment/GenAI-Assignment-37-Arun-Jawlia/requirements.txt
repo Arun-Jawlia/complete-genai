@@ -1,6 +1,9 @@
+streamlit
+cassio
 langchain
-langchain-openai
-PyPDF2
-dotenv
-langchain-core
 langchain-community
+langchain-classic
+langchain-openai
+langchain-text-splitters
+PyPDF2
+python-dotenv
