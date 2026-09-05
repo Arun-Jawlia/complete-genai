@@ -26,4 +26,8 @@ assignment-36-huggingface/
 ## Model used:
 ```
 Meta Llama 3.1 8B Instruct
+
+and 
+
+mistralai/Mistral-7B-Instruct-v0.2
 ```
