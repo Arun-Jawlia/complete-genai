@@ -27,5 +27,4 @@ GenAI-Assignment-35-Arun-Jawlia/
 2. Checkout to folder: `GenAI-Assignment-35-Arun-Jawlia`
 3. install all packages: `pip install -r requirements.txt`
 4. add your huggingface token in `.env` file in root 
-5. Run the project `python app.py`
-6. Open the local URL in your browser: ` http://localhost:8501`
+5. Run the project `assignment.ipynb`
