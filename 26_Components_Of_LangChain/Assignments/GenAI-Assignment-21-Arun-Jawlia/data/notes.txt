@@ -1,0 +1,17 @@
+Personal Knowledge Assistant
+
+LangChain is a framework for building applications powered by large language models.
+
+A document loader is used to load information from different sources such as
+text files, CSV files, PDF documents, websites, and directories.
+
+Document loaders convert different types of data into LangChain Document objects.
+
+Each Document generally contains:
+1. page_content - the actual text
+2. metadata - information about the source document
+
+After loading documents, the data can be split into smaller chunks.
+These chunks can later be used for embeddings, retrieval, and question answering.
+
+This assignment focuses only on document ingestion and preparation.
