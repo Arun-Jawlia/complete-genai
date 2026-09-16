@@ -1,17 +1,15 @@
-Personal Knowledge Assistant
+Python is a high-level programming language. It is widely used for web development, automation, data science, and artificial intelligence.
 
-LangChain is a framework for building applications powered by large language models.
+Machine learning is a branch of artificial intelligence that enables computers to learn patterns from data and make predictions.
 
-A document loader is used to load information from different sources such as
-text files, CSV files, PDF documents, websites, and directories.
+Generative AI uses machine learning models to generate new content such as text, images, audio, and code.
 
-Document loaders convert different types of data into LangChain Document objects.
+Retrieval Augmented Generation, commonly called RAG, combines document retrieval with a language model. Relevant documents are retrieved before generating an answer.
 
-Each Document generally contains:
-1. page_content - the actual text
-2. metadata - information about the source document
+Vector databases store numerical representations of data called embeddings. They allow applications to perform similarity searches efficiently.
 
-After loading documents, the data can be split into smaller chunks.
-These chunks can later be used for embeddings, retrieval, and question answering.
+FAISS is a library designed for efficient similarity search over dense vectors.
 
-This assignment focuses only on document ingestion and preparation.
+ChromaDB is a vector database commonly used for storing embeddings and building retrieval-based AI applications.
+
+LangChain provides abstractions for building applications using language models, embeddings, retrievers, and vector stores.

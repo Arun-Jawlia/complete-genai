@@ -1,5 +1,11 @@
-langchain 
-langchain-community 
-pypdf b
-eautifulsoup4 
-lxml
+python-dotenv
+langchain
+langchain-openai
+langchain-community
+langchain-huggingface
+sentence-transformers
+langchain-ollama
+faiss-cpu
+chromadb
+langchain-chroma
+numpy
