@@ -1,2 +1,7 @@
-groq 
+groq
 python-dotenv
+faiss-cpu
+sentence-transformers
+pypdf
+pandas
+numpy
